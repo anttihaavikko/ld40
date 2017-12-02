@@ -6,6 +6,9 @@ public class ProgressManager : MonoBehaviour {
 
 	public int level = 0;
 
+	public bool spaceTold = false;
+	public bool multiTold = false;
+
 	/******/
 
 	private static ProgressManager instance = null;
@@ -22,5 +25,19 @@ public class ProgressManager : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad(instance.gameObject);
+	}
+
+	public void SpaceTutorial() {
+		if (!spaceTold) {
+			Manager.Instance.bubble.QueMessage ("You can also (calculate) by pressing (space)!");
+			spaceTold = true;
+		}
+	}
+
+	public void MultiTutorial() {
+		if (!multiTold) {
+			Manager.Instance.bubble.QueMessage ("Multi help");
+			multiTold = true;
+		}
 	}
 }

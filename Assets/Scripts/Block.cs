@@ -36,6 +36,26 @@ public class Block : MonoBehaviour {
 		return blockColors [idx];
 	}
 
+	public static Color TextColor(int idx) {
+		float baseSat = 0.6f;
+		float baseVal = 0.8f;
+
+		Color[] blockColors = {
+			new Color(0.5f, 0.5f, 0.5f),
+			Color.HSVToRGB(0f, baseSat, baseVal),
+			Color.HSVToRGB(0.1f, baseSat, baseVal),
+			Color.HSVToRGB(0.2f, baseSat, baseVal),
+			Color.HSVToRGB(0.3f, baseSat, baseVal),
+			Color.HSVToRGB(0.4f, baseSat, baseVal),
+			Color.HSVToRGB(0.5f, baseSat, baseVal),
+			Color.HSVToRGB(0.6f, baseSat, baseVal),
+			Color.HSVToRGB(0.7f, baseSat, baseVal),
+			Color.HSVToRGB(0.8f, baseSat, baseVal)
+		};
+
+		return blockColors [idx];
+	}
+
 	public void Pulse() {
 		anim.speed = 0.5f;
 		anim.SetBool ("pulse", true);

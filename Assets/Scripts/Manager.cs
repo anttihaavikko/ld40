@@ -21,6 +21,7 @@ public class Manager : MonoBehaviour {
 	private int currentTurn = 0;
 	private int turnNumber = 0;
 	private bool roundEnded = false;
+	private bool locked = true;
 
 	public Text infoText;
 
@@ -30,6 +31,8 @@ public class Manager : MonoBehaviour {
 	private bool loading = false;
 
 	private CustomButton buttonToShow;
+
+	public SpeechBubble bubble;
 
 	private static Manager instance = null;
 	public static Manager Instance {
@@ -56,6 +59,26 @@ public class Manager : MonoBehaviour {
 
 		int num = StartCards ();
 		handArea.SpawnCards (3, num);
+
+		bubble.SetColor (Block.TextColor (opponentNum));
+
+		if (ProgressManager.Instance.level == 0) {
+			Invoke ("Intro", 1.2f);
+		} else {
+			locked = false;
+		}
+	}
+
+	void Intro() {
+		bubble.QueMessage ("Howdy!");
+		bubble.QueMessage ("You up for a match of good old (Tic-Tac-Matrix)?");
+		bubble.QueMessage ("Huh, dunno how to (play)? Well it's (suuuuper) easy...");
+		bubble.QueMessage ("Just (match three of a kind) to in any direction to (win).");
+		bubble.QueMessage ("Whaat? You don't even know how to (add up matrices). Well, it's easy too. Lemme show ya...");
+		bubble.QueMessage ("IMAGE1");
+		bubble.QueMessage ("Kay, (ready to go)?\n\nLets see if you can (handle the heat)!");
+		bubble.CheckQueuedMessages ();
+		locked = false;
 	}
 
 	public void Calculate() {
@@ -108,6 +131,14 @@ public class Manager : MonoBehaviour {
 			turnNumber++;
 			currentTurn = (currentTurn + 1) % 2;
 
+			if (turnNumber >= 4 && currentTurn == 0) {
+				ProgressManager.Instance.SpaceTutorial ();
+			}
+
+			if (currentTurn == 0 && !roundEnded) {
+				bubble.CheckQueuedMessages ();
+			}
+
 			if (currentTurn == 1 && !roundEnded) {
 				OpponentTurn ();
 			}
@@ -146,17 +177,17 @@ public class Manager : MonoBehaviour {
 	}
 
 	public bool CanInteract() {
-		return (currentTurn == 0 && !roundEnded);
+		return (currentTurn == 0 && !roundEnded && !bubble.IsShown() && !locked);
 	}
 
 	private void OpponentTurn() {
 
+		float wait = 1f;
 		float opponentSpeed = 0.5f;
-		opponentSpeed = 0.1f;
 
-		Invoke ("PickOperation", opponentSpeed);
-		Invoke ("PickMatrix", opponentSpeed * 3);
-		Invoke ("Calculate", opponentSpeed * 6);
+		Invoke ("PickOperation", opponentSpeed + wait);
+		Invoke ("PickMatrix", opponentSpeed * 3 + wait);
+		Invoke ("Calculate", opponentSpeed * 6 + wait);
 	}
 
 	private void PickOperation() {
@@ -196,7 +227,7 @@ public class Manager : MonoBehaviour {
 
 	public int OperatorMax() {
 		int omax = 3;
-		omax = (ProgressManager.Instance.level == 0 || (ProgressManager.Instance.level == 1 && turnNumber < 5)) ? 2 : omax;
+		omax = (ProgressManager.Instance.level == 0 || (ProgressManager.Instance.level == 1 && turnNumber < 2)) ? 2 : omax;
 		omax = (ProgressManager.Instance.level == 0 && turnNumber < 5) ? 1 : omax;
 		return omax;
 	}

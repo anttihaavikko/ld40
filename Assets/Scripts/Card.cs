@@ -52,6 +52,10 @@ public class Card : MonoBehaviour {
 		} else {
 			operation = Random.Range (0, Manager.Instance.OperatorMax());
 			operationSprite.sprite = Manager.Instance.operationSprites [operation];
+
+			if (operation == 2) {
+				ProgressManager.Instance.MultiTutorial();
+			}
 		}
 
 		shadowScale = shadow.localScale;
