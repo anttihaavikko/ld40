@@ -232,7 +232,12 @@ public class Manager : MonoBehaviour {
 			cam.Fade (true, 0.5f);
 			loading = true;
 			ProgressManager.Instance.level++;
-			Invoke ("ReloadScene", 0.75f);
+
+			if (ProgressManager.Instance.level > 5) {
+				Invoke ("ToEndScene", 0.75f);
+			} else {
+				Invoke ("ReloadScene", 0.75f);
+			}
 		}
 	}
 
@@ -247,6 +252,10 @@ public class Manager : MonoBehaviour {
 
 	void ReloadScene() {
 		SceneManager.LoadSceneAsync ("Main");
+	}
+
+	void ToEndScene() {
+		SceneManager.LoadSceneAsync ("End");
 	}
 
 	public bool StarterMatrix() {

@@ -134,6 +134,7 @@
      <Compile Include="Assets\Scripts\CustomButton.cs" />
      <Compile Include="Assets\Scripts\EffectCamera.cs" />
      <Compile Include="Assets\Scripts\EffectManager.cs" />
+     <Compile Include="Assets\Scripts\EndView.cs" />
      <Compile Include="Assets\Scripts\Face.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\Matrix.cs" />

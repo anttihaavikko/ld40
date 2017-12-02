@@ -8,11 +8,15 @@ public class BlockCharacter : MonoBehaviour {
 	public GameObject[] accessories;
 
 	public bool isPlayer = false;
+	public bool endAnim = false;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
-		RandomizeSpeed ();
+
+		if (!endAnim) {
+			RandomizeSpeed ();
+		}
 
 		if (isPlayer) {
 			ActivatePreviousAccessories ();
@@ -23,7 +27,7 @@ public class BlockCharacter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Random.value < 0.01f) {
+		if (!endAnim && Random.value < 0.01f) {
 			RandomizeSpeed ();
 		}
 	}
