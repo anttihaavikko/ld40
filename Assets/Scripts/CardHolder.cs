@@ -27,6 +27,23 @@ public class CardHolder : MonoBehaviour {
 		return (cardType == -1 || type == cardType);
 	}
 
+	public void PickRandoms() {
+		Card c = null;
+
+		while (c == null || !c.isMatrix) {
+			c = cards [Random.Range (0, cards.Count)];
+		}
+
+		c.UseCard ();
+		c = null;
+
+		while (c == null || c.isMatrix) {
+			c = cards [Random.Range (0, cards.Count)];
+		}
+
+		c.UseCard ();
+	}
+
 	public void SpawnCards(int mats, int ops) {
 		if (cards.Count < cardMax) {
 

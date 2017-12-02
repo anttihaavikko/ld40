@@ -64,13 +64,24 @@ public class Manager : MonoBehaviour {
 
 			calcButton.ChangeVisibility (false);
 
-			resultMatrix.CheckLines ();
+			int winner = resultMatrix.CheckLines ();
+
+			if (winner == playerNum) {
+				Debug.Log ("Player Wins!");
+			} else if(winner == opponentNum) {
+				Debug.Log ("Opponent Wins!");
+			}
 		}
 	}
 
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			Calculate ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.Q)) {
+			handArea.PickRandoms ();
+			Invoke ("Calculate", 0.25f);
 		}
 
 		CheckCalcButtonVisibility ();

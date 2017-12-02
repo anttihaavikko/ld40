@@ -50,7 +50,7 @@ public class BlockMatrix : MonoBehaviour {
 		return matrix;
 	}
 
-	public void CheckLines() {
+	public int CheckLines() {
 		int winner = -1;
 
 		for (int i = 0; i < 3; i++) {
@@ -90,6 +90,10 @@ public class BlockMatrix : MonoBehaviour {
 			}
 		}
 
-//		Debug.Log ("Match for " + winner);
+		if (winner != -1) {
+			Debug.Log ("Match for " + winner);
+		}
+
+		return winner;
 	}
 }

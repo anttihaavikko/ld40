@@ -135,8 +135,7 @@ public class Card : MonoBehaviour {
 		int type = isMatrix ? 0 : 1;
 
 		if (dragTime < 0.25f && !LeftArea(1.2f)) {
-			currentHolder.RemoveCard (this);
-			currentHolder.targetHolders[type].AddCard (this, false);
+			UseCard ();
 			return;
 		} else {
 			
@@ -152,6 +151,12 @@ public class Card : MonoBehaviour {
 		}
 			
 		currentHolder.AddCard (this, true);
+	}
+
+	public void UseCard() {
+		int type = isMatrix ? 0 : 1;
+		currentHolder.RemoveCard (this);
+		currentHolder.targetHolders[type].AddCard (this, false);
 	}
 
 	private bool LeftArea(float distance) {
