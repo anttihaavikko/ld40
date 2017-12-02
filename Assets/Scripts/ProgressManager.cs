@@ -36,7 +36,10 @@ public class ProgressManager : MonoBehaviour {
 
 	public void MultiTutorial() {
 		if (!multiTold) {
-			Manager.Instance.bubble.QueMessage ("Multi help");
+			Manager.Instance.bubble.QueMessage ("Oh righ, (multiplication)!\nI bet a newb such as you doesn't even know (how to) do it...");
+			Manager.Instance.bubble.QueMessage ("IMAGE2");
+			Manager.Instance.bubble.QueMessage ("IMAGE3");
+			Manager.Instance.bubble.QueMessage ("And (so on). You get the drift. Lets get (crackin')!");
 			multiTold = true;
 		}
 	}

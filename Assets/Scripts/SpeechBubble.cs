@@ -115,14 +115,28 @@ public class SpeechBubble : MonoBehaviour {
 		image.enabled = false;
 
 		if (str == "IMAGE1") {
-			message = "";
-			image.sprite = sprites [0];
-			image.enabled = true;
-			done = true;
+			ShowImage (0);
+			return;
+		}
+
+		if (str == "IMAGE2") {
+			ShowImage (1);
+			return;
+		}
+
+		if (str == "IMAGE3") {
+			ShowImage (2);
 			return;
 		}
 
 		Invoke ("ShowText", 0.2f);
+	}
+
+	private void ShowImage(int idx) {
+		message = "";
+		image.sprite = sprites [idx];
+		image.enabled = true;
+		done = true;
 	}
 
 	public void QueMessage(string str) {

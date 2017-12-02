@@ -305,6 +305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  spaceTold: 0
+  multiTold: 0
 --- !u!4 &80276389
 Transform:
   m_ObjectHideFlags: 0
@@ -5510,6 +5512,8 @@ MonoBehaviour:
   image: {fileID: 1764525621}
   sprites:
   - {fileID: 21300000, guid: 087c8d4eae6e0421e96604ad297d0f33, type: 3}
+  - {fileID: 21300000, guid: be831291ee99840738c415affff1073e, type: 3}
+  - {fileID: 21300000, guid: 720d6ec14f97042e0ba2ab8a344f8333, type: 3}
 --- !u!1 &1822179621
 GameObject:
   m_ObjectHideFlags: 0
