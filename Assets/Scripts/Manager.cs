@@ -58,7 +58,6 @@ public class Manager : MonoBehaviour {
 		resultMatrix.FillNormal ();
 
 		int num = StartCards ();
-		handArea.SpawnCards (3, num);
 
 		bubble.SetColor (Block.TextColor (opponentNum));
 
@@ -66,6 +65,7 @@ public class Manager : MonoBehaviour {
 			Invoke ("Intro", 1.2f);
 		} else {
 			locked = false;
+			handArea.SpawnCards (3, num);
 		}
 	}
 
@@ -73,12 +73,17 @@ public class Manager : MonoBehaviour {
 		bubble.QueMessage ("Howdy!");
 		bubble.QueMessage ("You up for a match of good old (Tic-Tac-Matrix)?");
 		bubble.QueMessage ("Huh, dunno how to (play)? Well it's (suuuuper) easy...");
+		bubble.QueMessage ("CARDS");
 		bubble.QueMessage ("Just (match three of a kind) to in any direction to (win).");
 		bubble.QueMessage ("Whaat? You don't even know how to (add up matrices). Well, it's easy too. Lemme show ya...");
 		bubble.QueMessage ("IMAGE1");
-		bubble.QueMessage ("Kay, (ready to go)?\n\nLets see if you can (handle the heat)!");
+		bubble.QueMessage ("Kay, (ready to go)?\nLets see if you can (handle the heat)!");
 		bubble.CheckQueuedMessages ();
 		locked = false;
+	}
+
+	public void GiveCards() {
+		handArea.SpawnCards (3, 2);
 	}
 
 	public void Calculate() {

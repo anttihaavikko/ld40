@@ -129,6 +129,12 @@ public class SpeechBubble : MonoBehaviour {
 			return;
 		}
 
+		if (str == "CARDS") {
+			Manager.Instance.GiveCards ();
+			PopMessage ();
+			return;
+		}
+
 		Invoke ("ShowText", 0.2f);
 	}
 
@@ -154,8 +160,9 @@ public class SpeechBubble : MonoBehaviour {
 	}
 
 	private void PopMessage() {
-		ShowMessage (messageQue [0]);
+		string msg = messageQue [0];
 		messageQue.RemoveAt (0);
+		ShowMessage (msg);
 	}
 
 	private void ShowText() {
