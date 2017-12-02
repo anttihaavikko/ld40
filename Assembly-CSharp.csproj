@@ -124,6 +124,8 @@
      <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\AutoEnd.cs" />
      <Compile Include="Assets\Scripts\Blink.cs" />
+     <Compile Include="Assets\Scripts\Block.cs" />
+     <Compile Include="Assets\Scripts\BlockMatrix.cs" />
      <Compile Include="Assets\Scripts\Card.cs" />
      <Compile Include="Assets\Scripts\CardHolder.cs" />
      <Compile Include="Assets\Scripts\ConfigManager.cs" />
@@ -131,6 +133,7 @@
      <Compile Include="Assets\Scripts\EffectManager.cs" />
      <Compile Include="Assets\Scripts\Face.cs" />
      <Compile Include="Assets\Scripts\Manager.cs" />
+     <Compile Include="Assets\Scripts\Matrix.cs" />
      <Compile Include="Assets\Scripts\Shine.cs" />
      <Compile Include="Assets\Scripts\SoundEffect.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />

@@ -28,10 +28,14 @@ public class Card : MonoBehaviour {
 
 	public Transform shadow;
 
+	private BlockMatrix blockMatrix;
+
 	// Use this for initialization
 	void Start () {
 		originalScale = transform.localScale;
 		coll = GetComponent<Collider2D> ();
+
+		blockMatrix = GetComponentInChildren<BlockMatrix> ();
 
 //		sprite.color = new Color (Random.Range (0.5f, 1f), Random.Range (0.5f, 1f), Random.Range (0.5f, 1f));
 	}
@@ -139,5 +143,9 @@ public class Card : MonoBehaviour {
 		fromPosition = transform.position;
 		toPosition = pos;
 		moveDuration = 0f;
+	}
+
+	public Matrix GetMatrix() {
+		return blockMatrix.GetMatrix ();
 	}
 }

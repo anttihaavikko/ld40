@@ -100,4 +100,14 @@ public class CardHolder : MonoBehaviour {
 	public int CardCount() {
 		return cards.Count;
 	}
+
+	public Card PopCard() {
+		if (cards.Count > 0) {
+			Card c = cards [0];
+			cards.RemoveAt (0);
+			return c;
+		}
+
+		return null;
+	}
 }
