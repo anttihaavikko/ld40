@@ -130,15 +130,15 @@ public class Face : MonoBehaviour {
 
 	public void RotateBrows(float left, float right) {
 		if (brows.Length > 0) {
-			browsTargetAngle [0] = browsOriginalAngle [0] + left;
-			browsTargetAngle [1] = browsOriginalAngle [1] + right;
+			browsTargetAngle [1] = browsOriginalAngle [1] + left;
+			browsTargetAngle [0] = browsOriginalAngle [0] + right;
 		}
 	}
 
 	public void MoveBrows(float left, float right) {
 		if (brows.Length > 0) {
-			browsTargetPosition [0] = browsOriginalPosition [0] + Vector3.up * browRange * left;
-			browsTargetPosition [1] = browsOriginalPosition [1] + Vector3.up * browRange * right;
+			browsTargetPosition [1] = browsOriginalPosition [1] + Vector3.up * browRange * left;
+			browsTargetPosition [0] = browsOriginalPosition [0] + Vector3.up * browRange * right;
 		}
 	}
 

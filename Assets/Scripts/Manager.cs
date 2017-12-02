@@ -68,8 +68,12 @@ public class Manager : MonoBehaviour {
 
 			if (winner == playerNum) {
 				Debug.Log ("Player Wins!");
+				playerBlock.face.Emote (Face.Emotion.Happy);
+				opponentBlock.face.Emote (Face.Emotion.Sad);
 			} else if(winner == opponentNum) {
 				Debug.Log ("Opponent Wins!");
+				opponentBlock.face.Emote (Face.Emotion.Happy);
+				playerBlock.face.Emote (Face.Emotion.Sad);
 			}
 		}
 	}
@@ -79,7 +83,7 @@ public class Manager : MonoBehaviour {
 			Calculate ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.Q)) {
+		if (Application.isEditor && Input.GetKeyDown (KeyCode.Q)) {
 			handArea.PickRandoms ();
 			Invoke ("Calculate", 0.25f);
 		}

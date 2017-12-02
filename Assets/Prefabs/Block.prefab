@@ -433,6 +433,7 @@ MonoBehaviour:
   numberSprite: {fileID: 212201352157838984}
   colorSprite: {fileID: 212129580225904802}
   anim: {fileID: 95537984824862676}
+  face: {fileID: 114913263085489684}
 --- !u!114 &114913263085489684
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,6 +7,7 @@ public class Block : MonoBehaviour {
 	public SpriteRenderer numberSprite;
 	public SpriteRenderer colorSprite;
 	public Animator anim;
+	public Face face;
 
 	public void SetNumber(int num) {
 		numberSprite.sprite = Manager.Instance.numberSprites [num];
@@ -35,5 +36,6 @@ public class Block : MonoBehaviour {
 
 	public void Pulse() {
 		anim.SetTrigger ("pulse");
+		face.Emote (Face.Emotion.Happy, Face.Emotion.Default, 2f);
 	}
 }
