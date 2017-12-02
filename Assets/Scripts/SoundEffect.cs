@@ -16,11 +16,6 @@ public class SoundEffect : MonoBehaviour {
 
 		if (pitchShift) {
 			float targetPitch = 1f;
-
-			if (GameManager.Instance) {
-				targetPitch = GameManager.Instance.stasisTimer > 0 ? 0.5f : 1f;
-			}
-
 			audioSource.pitch = (1f + Random.Range (-0.2f, 0.2f)) * targetPitch;
 		}
 

@@ -12,17 +12,6 @@ public class AudioManager : MonoBehaviour {
 	public SoundEffect effectPrefab;
 	public AudioClip[] effects;
 
-	public const int DING = 0;
-	public const int BLIP = 1;
-	public const int BLING = 2;
-	public const int WRONG = 3;
-	public const int EXPLOSION = 4;
-	public const int CHARGE = 5;
-	public const int SWOOSH = 6;
-	public const int BEAM = 7;
-
-	public bool inMenu = false;
-
 	public AudioLowPassFilter lowpass;
 	public AudioHighPassFilter highpass;
 
@@ -101,57 +90,14 @@ public class AudioManager : MonoBehaviour {
 
 	void Update() {
 
-		if (fadeInPos < 1f && (!HudManager.Instance || !HudManager.Instance.paused)) {
-			fadeInPos += Time.unscaledDeltaTime / fadeInDuration;
-		}
+		float targetPitch = 1f;
+		float targetLowpass = (false) ? 5000f : 22000;
+		float targetHighpass = (false) ? 350f : 10f;
+		float changeSpeed = 1f;
 
-		if (fadeOutPos < 1f) {
-			fadeOutPos += Time.unscaledDeltaTime / fadeOutDuration;
-		}
-
-		if (curMusic && fadeInPos >= 0f && (!HudManager.Instance || !HudManager.Instance.paused)) {
-			curMusic.volume = Mathf.Lerp (0f, musVolume, fadeInPos);
-		}
-
-		if (prevMusic) {
-			prevMusic.volume = Mathf.Lerp (musVolume, 0f, fadeOutPos);
-
-			if (prevMusic.volume <= 0f) {
-				prevMusic.Stop ();
-			}
-		}
-
-		if (GameManager.Instance) {
-//			reverb.reverbPreset = toReverb;
-			anim.SetBool ("reverb", false);
-
-			float targetPitch = GameManager.Instance.stasisTimer > 0 ? 0.75f : 1f;
-			float targetLowpass = (HudManager.Instance.paused) ? 5000f : 22000;
-			float targetHighpass = 10f;
-			float volumeMod = (HudManager.Instance.paused) ? 0.5f : 1f;
-
-			float changeSpeed = 1f;
-
-			if (!GameManager.Instance.waveOn) {
-				targetPitch = 0.99f;
-//				targetLowpass = 7000f;
-				targetHighpass = 350f;
-				volumeMod = 0.9f;
-				changeSpeed = 0.1f;
-			}
-
-			curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, targetPitch, 0.005f * changeSpeed);
-			lowpass.cutoffFrequency = Mathf.MoveTowards (lowpass.cutoffFrequency, targetLowpass, 750f * changeSpeed);
-			highpass.cutoffFrequency = Mathf.MoveTowards (highpass.cutoffFrequency, targetHighpass, 50f * changeSpeed);
-			curMusic.volume = Mathf.MoveTowards (curMusic.volume, volumeMod * musVolume, 0.01f * changeSpeed);
-		} else {
-
-			anim.SetBool ("reverb", true);
-
-			lowpass.cutoffFrequency = Mathf.MoveTowards (lowpass.cutoffFrequency, 22000, 750f * 1f);
-			curMusic.volume = Mathf.MoveTowards (curMusic.volume, 0.9f * musVolume, 0.01f * 1f);
-//			reverb.reverbPreset = fromReverb;
-		}
+		curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, targetPitch, 0.005f * changeSpeed);
+		lowpass.cutoffFrequency = Mathf.MoveTowards (lowpass.cutoffFrequency, targetLowpass, 750f * changeSpeed);
+		highpass.cutoffFrequency = Mathf.MoveTowards (highpass.cutoffFrequency, targetHighpass, 50f * changeSpeed);
 	}
 
 	public void PlayEffectAt(AudioClip clip, Vector3 pos, float volume, bool pitchShift = true) {

@@ -18,10 +18,6 @@ public class Blink : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (HudManager.Instance && HudManager.Instance.paused) {
-			return;
-		}
-
 		timer += dir * speed;
 
 		if (timer >= 0) {

@@ -24,7 +24,6 @@ public class CardHolder : MonoBehaviour {
 	public void SpawnCard() {
 		if (cards.Count < cardMax) {
 			Card c = Instantiate (cardPrefab, transform.position + (cards.Count + 1) * 0.5f * 1.1f * Vector3.right, Quaternion.identity);
-			c.transform.localScale = new Vector3 (Random.Range (0.5f, 1.5f), 1f, 1f);
 			AddCard (c, true);
 			PositionCards ();
 		}
@@ -94,7 +93,7 @@ public class CardHolder : MonoBehaviour {
 		for (int i = 0; i < cards.Count; i++) {
 			curPos += cards [i].transform.localScale.x * 0.5f;
 			cards [i].Move(transform.position + (-areaWidth * 0.5f + curPos) * Vector3.right + Vector3.back * 0.01f);
-			curPos += cards [i].transform.localScale.x * 0.5f + 0.1f;
+			curPos += cards [i].transform.localScale.x * 0.5f + 0.2f;
 		}
 	}
 

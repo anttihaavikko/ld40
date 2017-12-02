@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - DropAreas
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bg
+    uniqueID: 4215300921
+    locked: 0
+  - name: Table Objects
+    uniqueID: 1825501075
+    locked: 0
+  - name: Cards
+    uniqueID: 1662565431
+    locked: 0
+  - name: Fg
+    uniqueID: 1526962675
     locked: 0

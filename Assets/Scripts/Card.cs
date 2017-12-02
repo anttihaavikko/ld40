@@ -33,7 +33,7 @@ public class Card : MonoBehaviour {
 		originalScale = transform.localScale;
 		coll = GetComponent<Collider2D> ();
 
-		sprite.color = new Color (Random.Range (0.5f, 1f), Random.Range (0.5f, 1f), Random.Range (0.5f, 1f));
+//		sprite.color = new Color (Random.Range (0.5f, 1f), Random.Range (0.5f, 1f), Random.Range (0.5f, 1f));
 	}
 	
 	// Update is called once per frame
