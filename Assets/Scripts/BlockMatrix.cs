@@ -59,6 +59,10 @@ public class BlockMatrix : MonoBehaviour {
 		return matrix;
 	}
 
+	public void SetMatrix(Matrix m) {
+		matrix = m;
+	}
+
 	public int CheckLines(int plrNum, int oppNum) {
 		int winner = -1;
 

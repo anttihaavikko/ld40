@@ -34,6 +34,8 @@ public class Manager : MonoBehaviour {
 
 	public SpeechBubble bubble;
 
+	public ScaleShower[] turnIndicators;
+
 	private static Manager instance = null;
 	public static Manager Instance {
 		get { return instance; }
@@ -77,6 +79,7 @@ public class Manager : MonoBehaviour {
 		bubble.QueMessage ("Just (match three of a kind) to in any direction to (win).");
 		bubble.QueMessage ("Whaat? You don't even know how to (add up matrices). Well, it's easy too. Lemme show ya...");
 		bubble.QueMessage ("IMAGE1");
+		bubble.QueMessage ("TURN");
 		bubble.QueMessage ("Kay, (ready to go)?\nLets see if you can (handle the heat)!");
 		bubble.CheckQueuedMessages ();
 		locked = false;
@@ -136,6 +139,13 @@ public class Manager : MonoBehaviour {
 			turnNumber++;
 			currentTurn = (currentTurn + 1) % 2;
 
+			if (!roundEnded) {
+				UpdateTurnIndicators ();
+			} else {
+				turnIndicators [0].Hide ();
+				turnIndicators [1].Hide ();
+			}
+
 			if (turnNumber >= 4 && currentTurn == 0) {
 				ProgressManager.Instance.SpaceTutorial ();
 			}
@@ -167,6 +177,10 @@ public class Manager : MonoBehaviour {
 			Calculate ();
 		}
 
+		if (Application.isEditor && Input.GetKeyDown (KeyCode.A) && CanInteract ()) {
+			handArea.Analyze (resultMatrix.GetMatrix());
+		}
+
 		if (Application.isEditor && Input.GetKeyDown (KeyCode.Q) && CanInteract()) {
 			handArea.PickRandoms ();
 			Invoke ("Calculate", 0.25f);
@@ -190,9 +204,18 @@ public class Manager : MonoBehaviour {
 		float wait = 1f;
 		float opponentSpeed = 0.5f;
 
+		if(ProgressManager.Instance.WillAnalyze()) {
+			Debug.Log ("Running analyze...");
+			Invoke ("DoAnalyze", opponentSpeed);
+		}
+
 		Invoke ("PickOperation", opponentSpeed + wait);
 		Invoke ("PickMatrix", opponentSpeed * 3 + wait);
 		Invoke ("Calculate", opponentSpeed * 6 + wait);
+	}
+
+	private void DoAnalyze() {
+		handArea.Analyze (resultMatrix.GetMatrix());
 	}
 
 	private void PickOperation() {
@@ -239,5 +262,10 @@ public class Manager : MonoBehaviour {
 
 	public int StartCards() {
 		return (ProgressManager.Instance.level == 0) ? 2 : 3;
+	}
+
+	public void UpdateTurnIndicators() {
+		turnIndicators [currentTurn].Show ();;
+		turnIndicators [(currentTurn + 1) % 2].Hide ();
 	}
 }

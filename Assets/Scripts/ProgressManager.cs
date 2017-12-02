@@ -43,4 +43,28 @@ public class ProgressManager : MonoBehaviour {
 			multiTold = true;
 		}
 	}
+
+	public bool WillAnalyze() {
+		if (level == 0) {
+			return false;
+		}
+
+		if (level == 1) {
+			return (Random.value < 0.01f);
+		}
+
+		if (level == 2) {
+			return (Random.value < 0.1f);
+		}
+
+		if (level == 3) {
+			return (Random.value < 0.25f);
+		}
+
+		if (level == 4) {
+			return (Random.value < 0.5f);
+		}
+
+		return true;
+	}
 }

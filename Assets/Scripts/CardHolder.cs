@@ -12,6 +12,8 @@ public class CardHolder : MonoBehaviour {
 
 	public CardHolder[] targetHolders;
 
+	private Card winningOperation, winningCard;
+
 	public int cardType = -1;
 
 	// Use this for initialization
@@ -26,6 +28,11 @@ public class CardHolder : MonoBehaviour {
 	public void PickRandomMatrix() {
 		Card c = null;
 
+		if (winningCard) {
+			winningCard.UseCard ();
+			return;
+		}
+
 		while (c == null || !c.isMatrix) {
 			c = cards [Random.Range (0, cards.Count)];
 		}
@@ -35,6 +42,11 @@ public class CardHolder : MonoBehaviour {
 
 	public void PickRandomOperation() {
 		Card c = null;
+
+		if (winningOperation) {
+			winningOperation.UseCard ();
+			return;
+		}
 
 		while (c == null || c.isMatrix) {
 			c = cards [Random.Range (0, cards.Count)];
@@ -134,5 +146,77 @@ public class CardHolder : MonoBehaviour {
 		}
 
 		return null;
+	}
+
+	public bool Analyze(Matrix mat) {
+
+		winningCard = null;
+		winningOperation = null;
+
+		foreach (Card oc in cards) {
+
+			if (oc.isMatrix) {
+				continue;
+			}
+			
+			foreach (Card c in cards) {
+
+				if (!c.isMatrix) {
+					continue;
+				}
+
+				Matrix tempMatrix = Matrix.ZeroMatrix(3, 3);
+
+				if (oc.GetOperation () == 0) {
+					tempMatrix = mat + c.GetMatrix ();
+				}
+
+				if (oc.GetOperation () == 1) {
+					tempMatrix = mat - c.GetMatrix ();
+				}
+
+				if (oc.GetOperation () == 2) {
+					tempMatrix = mat * c.GetMatrix ();
+				}
+
+				int winner = -1;
+
+				Block[] winnerBlocks = new Block[3];
+
+				for (int i = 0; i < 3; i++) {
+
+					if (tempMatrix.mat [i, 0] == tempMatrix.mat [i, 1] && tempMatrix.mat [i, 1] == tempMatrix.mat [i, 2]) {
+						winner = (int)tempMatrix.mat [i, 0];
+						break;
+					}
+
+					if (tempMatrix.mat [0, i] == tempMatrix.mat [1, i] && tempMatrix.mat [1, i] == tempMatrix.mat [2, i]) {
+						winner = (int)tempMatrix.mat [0, i];
+						break;
+					}
+				}
+
+				if (winner == -1) {
+					if (tempMatrix.mat [0, 0] == tempMatrix.mat [1, 1] && tempMatrix.mat [1, 1] == tempMatrix.mat [2, 2]) {
+						winner = (int)tempMatrix.mat [1, 1];
+					}
+				}
+
+				if (winner == -1) {
+					if (tempMatrix.mat [2, 0] == tempMatrix.mat [1, 1] && tempMatrix.mat [1, 1] == tempMatrix.mat [0, 2]) {
+						winner = (int)tempMatrix.mat [1, 1];
+					}
+				}
+
+				if (winner != -1) {
+					Debug.Log ("Found winner with card " + cards.IndexOf(c) + " with operation " + oc.GetOperation ());
+					winningCard = c;
+					winningOperation = oc;
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

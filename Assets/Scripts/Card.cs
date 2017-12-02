@@ -171,6 +171,10 @@ public class Card : MonoBehaviour {
 		currentHolder.AddCard (this, true);
 	}
 
+	public void UseCard(float delay = 0f) {
+		Invoke ("UseCard", delay);
+	}
+
 	public void UseCard() {
 		int type = isMatrix ? 0 : 1;
 		currentHolder.RemoveCard (this);

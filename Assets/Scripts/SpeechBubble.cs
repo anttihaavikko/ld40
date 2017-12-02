@@ -135,6 +135,12 @@ public class SpeechBubble : MonoBehaviour {
 			return;
 		}
 
+		if (str == "TURN") {
+			Manager.Instance.UpdateTurnIndicators ();
+			PopMessage ();
+			return;
+		}
+
 		Invoke ("ShowText", 0.2f);
 	}
 
