@@ -30,12 +30,25 @@ public class Card : MonoBehaviour {
 
 	private BlockMatrix blockMatrix;
 
+	public bool isMatrix = true;
+	private int operation = -1;
+	public SpriteRenderer operationSprite;
+
+	private Vector3 shadowScale;
+
 	// Use this for initialization
 	void Start () {
 		originalScale = transform.localScale;
 		coll = GetComponent<Collider2D> ();
 
-		blockMatrix = GetComponentInChildren<BlockMatrix> ();
+		if (isMatrix) {
+			blockMatrix = GetComponentInChildren<BlockMatrix> ();
+		} else {
+			operation = Random.Range (0, 3);
+			operationSprite.sprite = Manager.Instance.operationSprites [operation];
+		}
+
+		shadowScale = shadow.localScale;
 
 //		sprite.color = new Color (Random.Range (0.5f, 1f), Random.Range (0.5f, 1f), Random.Range (0.5f, 1f));
 	}
@@ -68,8 +81,10 @@ public class Card : MonoBehaviour {
 		}
 
 		Tilt (lastPos, transform.position);
+		float offset = dragging ? 0.1f : 0f;
 
-		shadow.position = new Vector3 (transform.position.x, transform.position.y, -0.1f);
+		shadow.position = new Vector3 (transform.position.x, transform.position.y, dragging ? -0.1f : 0f);
+		shadow.localScale = dragging ? shadowScale * 1.1f : shadowScale;
 	}
 
 	private void Tilt(Vector3 prevPos, Vector3 curPos) {
@@ -117,9 +132,11 @@ public class Card : MonoBehaviour {
 
 		height = 0f;
 
+		int type = isMatrix ? 0 : 1;
+
 		if (dragTime < 0.25f && !LeftArea(1.2f)) {
 			currentHolder.RemoveCard (this);
-			currentHolder.targetHolder.AddCard (this, false);
+			currentHolder.targetHolders[type].AddCard (this, false);
 			return;
 		} else {
 			
@@ -127,8 +144,10 @@ public class Card : MonoBehaviour {
 
 			if (hit) {
 				CardHolder holder = hit.GetComponent<CardHolder> ();
-				holder.AddCard (this, false);
-				return;
+				if (holder.Allows (type)) {
+					holder.AddCard (this, false);
+					return;
+				}
 			}
 		}
 			
@@ -147,5 +166,9 @@ public class Card : MonoBehaviour {
 
 	public Matrix GetMatrix() {
 		return blockMatrix.GetMatrix ();
+	}
+
+	public int GetOperation() {
+		return operation;
 	}
 }

@@ -6,6 +6,7 @@ public class Block : MonoBehaviour {
 
 	public SpriteRenderer numberSprite;
 	public SpriteRenderer colorSprite;
+	public Animator anim;
 
 	public void SetNumber(int num) {
 		numberSprite.sprite = Manager.Instance.numberSprites [num];
@@ -30,5 +31,9 @@ public class Block : MonoBehaviour {
 		};
 
 		return blockColors [idx];
+	}
+
+	public void Pulse() {
+		anim.SetTrigger ("pulse");
 	}
 }

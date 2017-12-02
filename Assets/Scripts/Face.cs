@@ -49,6 +49,8 @@ public class Face : MonoBehaviour {
 
 	private Face.Emotion nextEmotion;
 
+	public bool followMouse = false;
+
 	// Use this for initialization
 	void Awake () {
 
@@ -152,6 +154,13 @@ public class Face : MonoBehaviour {
 
 	void MoveFace() {
 		Vector2 lookPos = lookTarget ? Vector2.MoveTowards (transform.parent.position, lookTarget.position, 1f) : Vector2.zero;
+
+		if(followMouse) {
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Vector3 mouseInWorld = Camera.main.transform.position - ray.direction * Camera.main.transform.position.z;
+			lookPos = mouseInWorld;
+		}
+
 		lookPos = Quaternion.Euler(new Vector3(0, 0, -transform.parent.rotation.eulerAngles.z)) * lookPos;
 
 		transform.localPosition = Vector2.MoveTowards(transform.localPosition, Vector2.Scale(lookPos.normalized, faceRange), Time.deltaTime * lookSpeed);
@@ -186,7 +195,7 @@ public class Face : MonoBehaviour {
 	}
 
 	void ResetBlink() {
-		blinkTimer = Random.Range (-50, -200);
+		blinkTimer = Random.Range (-50, -400);
 		blinkDir = 1f;
 	}
 

@@ -8,34 +8,38 @@ public class CardHolder : MonoBehaviour {
 	public int cardMax = 1;
 
 	public int numberOfCards = 1;
-	public Card cardPrefab;
+	public Card cardPrefab, operationCardPrefab;
 
-	public CardHolder targetHolder;
+	public CardHolder[] targetHolders;
+
+	public int cardType = -1;
 
 	// Use this for initialization
 	void Start () {
 		cards = new List<Card> ();
 
-		for (int i = 0; i < numberOfCards; i++) {
-			SpawnCard ();
+		if (cardType == -1) {
+			SpawnCards (3, 3);
 		}
 	}
 
-	public void SpawnCard() {
+	public bool Allows(int type) {
+		return (cardType == -1 || type == cardType);
+	}
+
+	public void SpawnCards(int mats, int ops) {
 		if (cards.Count < cardMax) {
-			Card c = Instantiate (cardPrefab, transform.position + (cards.Count + 1) * 0.5f * 1.1f * Vector3.right, Quaternion.identity);
-			AddCard (c, true);
-			PositionCards ();
-		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.Q)) {
-			SpawnCard ();
-		}
 
-		if (Input.GetKeyDown (KeyCode.W)) {
+			for (int i = 0; i < ops; i++) {
+				Card oc = Instantiate (operationCardPrefab, transform.position + (cards.Count + 1) * 0.5f * 1.1f * Vector3.right, Quaternion.identity);
+				AddCard (oc, true);
+			}
+
+			for (int i = 0; i < mats; i++) {
+				Card c = Instantiate (cardPrefab, transform.position + (cards.Count + 1) * 0.5f * 1.1f * Vector3.right, Quaternion.identity);
+				AddCard (c, true);
+			}
+
 			PositionCards ();
 		}
 	}
@@ -56,7 +60,7 @@ public class CardHolder : MonoBehaviour {
 			if (cards.Count >= cardMax) {
 				Card swap = cards [0];
 				cards.RemoveAt (0);
-				swap.currentHolder.targetHolder.AddCard (swap, false);
+				swap.currentHolder.targetHolders[0].AddCard (swap, false);
 			}
 
 			int slot = 0;

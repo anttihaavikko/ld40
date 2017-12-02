@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 4346061824358496}
   - component: {fileID: 212129580225904802}
   - component: {fileID: 114033224267115686}
+  - component: {fileID: 95537984824862676}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -401,6 +402,23 @@ Transform:
   m_Father: {fileID: 4627248688567726}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95537984824862676
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1634883795988390}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 271d2e727bf1246c7bb22cd8bafd6762, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114033224267115686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,6 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberSprite: {fileID: 212201352157838984}
   colorSprite: {fileID: 212129580225904802}
+  anim: {fileID: 95537984824862676}
 --- !u!114 &114913263085489684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -448,6 +467,7 @@ MonoBehaviour:
   mouthSad: {fileID: 0}
   mouthHappy: {fileID: 0}
   mouthOpen: {fileID: 0}
+  followMouse: 0
 --- !u!212 &212129580225904802
 SpriteRenderer:
   m_ObjectHideFlags: 1
