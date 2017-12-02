@@ -247,11 +247,10 @@ public class Matrix
 
 	public static Matrix RandomMatrix(int iRows, int iCols, int min, int max)       // Function generates the random matrix
 	{
-		Random random = new Random();
 		Matrix matrix = new Matrix(iRows, iCols);
 		for (int i = 0; i < iRows; i++)
 			for (int j = 0; j < iCols; j++)
-				matrix[i, j] = random.Next(min, max);
+				matrix[i, j] = UnityEngine.Random.Range(min, max);
 		return matrix;
 	}
 
