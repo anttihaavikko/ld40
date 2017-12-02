@@ -138,6 +138,8 @@
      <Compile Include="Assets\Scripts\Manager.cs" />
      <Compile Include="Assets\Scripts\Matrix.cs" />
      <Compile Include="Assets\Scripts\MoveUpAndDown.cs" />
+     <Compile Include="Assets\Scripts\ProgressManager.cs" />
+     <Compile Include="Assets\Scripts\ScaleShower.cs" />
      <Compile Include="Assets\Scripts\Shine.cs" />
      <Compile Include="Assets\Scripts\SoundEffect.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />

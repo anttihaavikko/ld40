@@ -17,17 +17,13 @@ public class CardHolder : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cards = new List<Card> ();
-
-		if (cardType == -1) {
-			SpawnCards (3, 3);
-		}
 	}
 
 	public bool Allows(int type) {
 		return (cardType == -1 || type == cardType);
 	}
 
-	public void PickRandoms() {
+	public void PickRandomMatrix() {
 		Card c = null;
 
 		while (c == null || !c.isMatrix) {
@@ -35,13 +31,21 @@ public class CardHolder : MonoBehaviour {
 		}
 
 		c.UseCard ();
-		c = null;
+	}
+
+	public void PickRandomOperation() {
+		Card c = null;
 
 		while (c == null || c.isMatrix) {
 			c = cards [Random.Range (0, cards.Count)];
 		}
 
 		c.UseCard ();
+	}
+
+	public void PickRandoms() {
+		PickRandomMatrix ();
+		PickRandomOperation ();
 	}
 
 	public void SpawnCards(int mats, int ops) {

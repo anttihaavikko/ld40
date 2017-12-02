@@ -7,9 +7,10 @@ public class EffectCamera : MonoBehaviour {
 
 	public Material transitionMaterial;
 
-	private float cutoff = 1f, targetCutoff = 0f;
+	private float cutoff = 1f, targetCutoff = 1f;
+	private float prevCutoff = 1f;
 	private float cutoffPos = 0f;
-	private float transitionTime = 5f;
+	private float transitionTime = 0.5f;
 
 	private PostProcessingBehaviour filters;
 	private float chromaAmount = 0f;
@@ -17,12 +18,14 @@ public class EffectCamera : MonoBehaviour {
 
 	void Start() {
 		filters = GetComponent<PostProcessingBehaviour>();
+		Invoke ("StartFade", 0.5f);
 	}
 
 	void Update() {
-		cutoff = Mathf.Lerp (cutoff, targetCutoff, cutoffPos);
+		cutoffPos += Time.fixedDeltaTime / transitionTime;
+		cutoffPos = (cutoffPos > 1f) ? 1f : cutoffPos;
+		cutoff = Mathf.Lerp (prevCutoff, targetCutoff, cutoffPos);
 		transitionMaterial.SetFloat ("_Cutoff", cutoff);
-		cutoffPos += Time.deltaTime / transitionTime;
 
 		// chromatic aberration update
 		if (filters) {
@@ -33,6 +36,10 @@ public class EffectCamera : MonoBehaviour {
 		}
 	}
 
+	void StartFade() {
+		Fade (false, 0.5f);
+	}
+
 	void OnRenderImage(RenderTexture src, RenderTexture dst) {
 		if (transitionMaterial) {
 			Graphics.Blit (src, dst, transitionMaterial);
@@ -40,7 +47,8 @@ public class EffectCamera : MonoBehaviour {
 	}
 
 	public void Fade(bool show, float delay) {
-		targetCutoff = show ? 1f : 0f;
+		targetCutoff = show ? 1.1f : -0.1f;
+		prevCutoff = show ? -0.1f : 1.1f;
 		cutoffPos = 0f;
 		transitionTime = delay;
 	}

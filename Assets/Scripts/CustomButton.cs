@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CustomButton : MonoBehaviour {
 
 	private Vector3 originalScale, targetScale;
 	private bool hovering = false;
 	private Vector3 hiddenScale = new Vector3(1.1f, 0f, 1f);
+
+	public UnityEvent clickEvent;
 
 	void Start() {
 		originalScale = transform.localScale;
@@ -26,7 +29,8 @@ public class CustomButton : MonoBehaviour {
 	}
 
 	public void OnMouseUp() {
-		Manager.Instance.Calculate ();
+//		Manager.Instance.Calculate ();
+		clickEvent.Invoke ();
 	}
 
 	void Update() {

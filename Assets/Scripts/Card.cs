@@ -43,8 +43,14 @@ public class Card : MonoBehaviour {
 
 		if (isMatrix) {
 			blockMatrix = GetComponentInChildren<BlockMatrix> ();
+
+			if (Manager.Instance.StarterMatrix ()) {
+				blockMatrix.FillStarter ();
+			} else {
+				blockMatrix.FillNormal ();
+			}
 		} else {
-			operation = Random.Range (0, 3);
+			operation = Random.Range (0, Manager.Instance.OperatorMax());
 			operationSprite.sprite = Manager.Instance.operationSprites [operation];
 		}
 
@@ -111,6 +117,10 @@ public class Card : MonoBehaviour {
 
 //		CardManager.Instance.cursor = 1;
 
+		if (!Manager.Instance.CanInteract ()) {
+			return;
+		}
+
 		dragging = true;
 		dragTime = 0f;
 
@@ -125,6 +135,10 @@ public class Card : MonoBehaviour {
 	}
 
 	public void OnMouseUp() {
+
+		if (!Manager.Instance.CanInteract ()) {
+			return;
+		}
 
 //		CardManager.Instance.cursor = 0;
 

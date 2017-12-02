@@ -9,6 +9,8 @@ public class Block : MonoBehaviour {
 	public Animator anim;
 	public Face face;
 
+	private int number = 0;
+
 	public void SetNumber(int num) {
 		numberSprite.sprite = Manager.Instance.numberSprites [num];
 		colorSprite.color = BlockColor(num);
@@ -35,7 +37,28 @@ public class Block : MonoBehaviour {
 	}
 
 	public void Pulse() {
-		anim.SetTrigger ("pulse");
+		anim.speed = 0.5f;
+		anim.SetBool ("pulse", true);
+		face.Emote (Face.Emotion.Happy);
+	}
+
+	public void PulseOnce() {
+		anim.SetBool ("pulse", true);
 		face.Emote (Face.Emotion.Happy, Face.Emotion.Default, 2f);
+		Invoke ("CancelPulse", 0.1f);
+	}
+
+	public void CancelPulse() {
+		anim.SetBool ("pulse", false);
+	}
+
+	public void NumberPulse(float delay, int num) {
+		number = num;
+		Invoke ("DoNumberPulse", delay);
+	}
+
+	void DoNumberPulse() {
+		anim.SetTrigger ("numberpulse");
+		SetNumber (number);
 	}
 }
