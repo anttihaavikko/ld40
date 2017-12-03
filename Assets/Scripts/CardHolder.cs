@@ -173,7 +173,7 @@ public class CardHolder : MonoBehaviour {
 		return null;
 	}
 
-	public bool Analyze(Matrix mat) {
+	public bool Analyze(Matrix mat, bool save = true) {
 
 		winningCard = null;
 		winningOperation = null;
@@ -235,8 +235,12 @@ public class CardHolder : MonoBehaviour {
 
 				if (winner != -1) {
 					Debug.Log ("Found winner with card " + cards.IndexOf(c) + " with operation " + oc.GetOperation ());
-					winningCard = c;
-					winningOperation = oc;
+
+					if (save) {
+						winningCard = c;
+						winningOperation = oc;
+					}
+
 					return true;
 				}
 			}

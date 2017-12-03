@@ -150,14 +150,118 @@ public class Manager : MonoBehaviour {
 				ProgressManager.Instance.SpaceTutorial ();
 			}
 
+			CancelInvoke ("HintOrTaunt");
+
 			if (currentTurn == 0 && !roundEnded) {
 				bubble.CheckQueuedMessages ();
+				Invoke ("HintOrTaunt", Random.Range(5f, 20f));
 			}
 
 			if (currentTurn == 1 && !roundEnded) {
 				OpponentTurn ();
 			}
 		}
+	}
+
+	public void HintOrTaunt() {
+
+		Debug.Log ("Message time... " + Time.time);
+
+		if (bubble.QueCount () > 0 || bubble.IsShown()) {
+			return;
+		}
+
+		if (Random.value > 0.5f) {
+			return;
+		}
+
+		bool canWin = handArea.Analyze (resultMatrix.GetMatrix (), false);
+
+		if (canWin && Random.value < 0.5f) {
+			
+			string[] hintParts1 = {
+				"Wanna (hint)?",
+				"Need some (help)?",
+				"You're taking (forever)!"
+			};
+
+			string[] hintParts2 = {
+				"\nThere is a (winning move combination) in the hand right now.",
+				"\nThere just might be a (killer combination) in there as we speak...",
+				"\nJust pick any of em, there is no way to win (;])"
+			};
+
+			bubble.QueMessage (hintParts1[Random.Range(0, hintParts1.Length)] + hintParts2[Random.Range(0, hintParts2.Length)]);
+
+			return;
+		}
+
+		string plat = "Did your (browser) crash? Try using (IE), I heard it's (the best)!";
+
+		if (Application.platform == RuntimePlatform.LinuxPlayer || Application.platform == RuntimePlatform.LinuxEditor) {
+			plat = "Huh, you're still thinking. Should I put up the (hourglass cursor)?";
+		}
+
+		if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor) {
+			plat = "Huh, you're still thinking. Should I put up the (rainbow wheel)?";
+		}
+
+		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor) {
+			plat = "Huh, did your computer (bluescreen) or what is going on? Need the (hourglass cursor)?";
+		}
+
+		string[] adjectives = {
+			"slow",
+			"sluggish",
+			"lame",
+			"[INSERT INSULTING ADJECTIVE]",
+			"weak",
+			"uncool",
+			"inconsiderate",
+			"loitering",
+			"apathetic",
+			"pathetic",
+			"passive",
+			"tardy"
+		};
+
+		string adj = adjectives [Random.Range (0, adjectives.Length)];
+		string adj2 = adjectives [Random.Range (0, adjectives.Length)];
+
+		string[] questions = {
+			"Need to",
+			"Wanna",
+			"Maybe"
+		};
+
+		string que = questions [Random.Range (0, questions.Length)];
+
+		string[] suggestions = {
+			"How about",
+			"Try",
+			"I'd use"
+		};
+
+		string sug = suggestions [Random.Range (0, suggestions.Length)];
+
+		string[] taunts = {
+			"Did you fall sleep?",
+			"Still there?",
+			"Need some help?",
+			"Need a hint?",
+			plat,
+			que + " use a (lifeline)? " + sug + " (50:50)?",
+			que + " use a (lifeline)? " + sug + " (Phone-a-Friend)?",
+			que + " use a (lifeline)? " + sug + " (Ask the Audience)?",
+			"I'm waiting! Stop being so (" + adj + ").",
+			"Zzzzzzzzz....",
+			"How on earth can you be so (" + adj + ") and (" + adj2 + ")?",
+			"Work those (" + adj + " brain cells)!",
+			"([INSERT YOUR MOM JOKE])...",
+			"You come here often?",
+		};
+
+		bubble.QueMessage (taunts [Random.Range (0, taunts.Length)]);
 	}
 
 	void DisplayText(string str, CustomButton btn, float delay) {

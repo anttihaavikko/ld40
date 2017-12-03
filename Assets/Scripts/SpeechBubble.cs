@@ -93,6 +93,10 @@ public class SpeechBubble : MonoBehaviour {
 		}
 	}
 
+	public int QueCount() {
+		return messageQue.Count;
+	}
+
 	public void SkipMessage() {
 		done = true;
 		messagePos = -1;
