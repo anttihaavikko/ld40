@@ -10,6 +10,11 @@ public class ProgressManager : MonoBehaviour {
 	public bool multiTold = false;
 	public bool loopTold = false;
 
+	public int selectedPlayerColor = 0;
+	public int opponentColor = 0;
+
+	public Sprite[] numberSprites;
+
 	/******/
 
 	private static ProgressManager instance = null;
@@ -26,6 +31,10 @@ public class ProgressManager : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad(instance.gameObject);
+	}
+
+	public void GenerateOpponentColor() {
+		opponentColor = (selectedPlayerColor + Random.Range(1, 9)) % 10;
 	}
 
 	public void LoopTutorial() {

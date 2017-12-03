@@ -12,7 +12,7 @@ public class Block : MonoBehaviour {
 	private int number = 0;
 
 	public void SetNumber(int num) {
-		numberSprite.sprite = Manager.Instance.numberSprites [num];
+		numberSprite.sprite = ProgressManager.Instance.numberSprites [num];
 		colorSprite.color = BlockColor(num);
 	}
 

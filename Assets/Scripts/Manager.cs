@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
-
-	public Sprite[] numberSprites;
 	public Sprite[] operationSprites;
 
 	public CardHolder matrixArea, operatorArea, handArea;
@@ -51,8 +49,8 @@ public class Manager : MonoBehaviour {
 	}
 
 	void Start() {
-		playerNum = Random.Range (0, 10);
-		opponentNum = (playerNum + Random.Range(1, 9)) % 10;
+		playerNum = ProgressManager.Instance.selectedPlayerColor;
+		opponentNum = ProgressManager.Instance.opponentColor;
 
 		playerBlock.SetNumber (playerNum);
 		opponentBlock.SetNumber (opponentNum);
@@ -87,7 +85,7 @@ public class Manager : MonoBehaviour {
 
 	public void GiveCards() {
 		int num = StartCards ();
-		handArea.SpawnCards (3, 2);
+		handArea.SpawnCards (3, num);
 	}
 
 	public void Calculate() {
@@ -364,6 +362,8 @@ public class Manager : MonoBehaviour {
 			cam.Fade (true, 0.5f);
 			loading = true;
 			ProgressManager.Instance.level++;
+
+			ProgressManager.Instance.GenerateOpponentColor ();
 
 			if (ProgressManager.Instance.level > 5) {
 				Invoke ("ToEndScene", 0.75f);
