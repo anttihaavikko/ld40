@@ -225,6 +225,7 @@ MonoBehaviour:
   menuButton: {fileID: 1120951369}
   playerAnimator: {fileID: 1726016769}
   face: {fileID: 1565330083}
+  cam: {fileID: 1848150789}
 --- !u!1 &44491198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1659,7 @@ GameObject:
   - component: {fileID: 1120951369}
   - component: {fileID: 1120951374}
   m_Layer: 0
-  m_Name: Next Button
+  m_Name: Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1678,8 +1679,8 @@ MonoBehaviour:
   clickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: NextMatch
+      - m_Target: {fileID: 39646304}
+        m_MethodName: DoMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

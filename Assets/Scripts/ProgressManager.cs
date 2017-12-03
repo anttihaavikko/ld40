@@ -39,7 +39,7 @@ public class ProgressManager : MonoBehaviour {
 
 	public void LoopTutorial() {
 		if (!loopTold) {
-			Manager.Instance.bubble.QueMessage ("You see, there are (limits). The values must be between (0 and 9) or it (loops) around...");
+			Manager.Instance.bubble.QueMessage ("You see, there are (limits). The value must be between (0 and 9) or it (loops) around...");
 			loopTold = true;
 		}
 	}

@@ -51,6 +51,8 @@ public class EffectCamera : MonoBehaviour {
 		prevCutoff = show ? -0.1f : 1.1f;
 		cutoffPos = 0f;
 		transitionTime = delay;
+
+		AudioManager.Instance.PlayEffectAt (12, Vector3.zero, 0.2f);
 	}
 
 	public void Chromate(float amount, float speed) {

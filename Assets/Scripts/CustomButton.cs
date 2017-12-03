@@ -13,7 +13,7 @@ public class CustomButton : MonoBehaviour {
 
 	public UnityEvent clickEvent;
 
-	void Start() {
+	void Awake() {
 		originalScale = transform.localScale;
 		targetScale = hiddenScale;
 		transform.localScale = targetScale;
@@ -21,10 +21,14 @@ public class CustomButton : MonoBehaviour {
 
 	public void OnMouseEnter() {
 		CursorManager.Instance.pointing = true;
+		hovering = true;
+		AudioManager.Instance.PlayEffectAt (14, transform.position, 0.1f);
 	}
 
 	public void OnMouseExit() {
 		CursorManager.Instance.pointing = false;
+		hovering = false;
+		AudioManager.Instance.PlayEffectAt (14, transform.position, 0.04f);
 	}
 
 	public void OnMouseDown() {

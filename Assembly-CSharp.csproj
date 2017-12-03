@@ -147,6 +147,7 @@
      <Compile Include="Assets\Scripts\Shine.cs" />
      <Compile Include="Assets\Scripts\SoundEffect.cs" />
      <Compile Include="Assets\Scripts\SpeechBubble.cs" />
+     <Compile Include="Assets\StartView.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />

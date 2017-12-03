@@ -75,7 +75,7 @@ public class Manager : MonoBehaviour {
 		bubble.QueMessage ("Huh, dunno how to (play)? Well it's (suuuuper) easy...");
 		bubble.QueMessage ("CARDS");
 		bubble.QueMessage ("Just (match three of a kind) to in any direction to (win).");
-		bubble.QueMessage ("Whaat? You don't even know how to (add up matrices). Well, it's easy too. Lemme show ya...");
+		bubble.QueMessage ("(Whaat)? You don't even know how to (add up matrices). Well, it's easy too. Lemme show ya...");
 		bubble.QueMessage ("IMAGE1");
 		bubble.QueMessage ("TURN");
 		bubble.QueMessage ("Kay, (ready to go)?\nLets see if you can (handle the heat)!");
@@ -182,6 +182,10 @@ public class Manager : MonoBehaviour {
 		Debug.Log ("Message time... " + Time.time);
 
 		if (bubble.QueCount () > 0 || bubble.IsShown()) {
+			return;
+		}
+
+		if (Input.GetMouseButton (0)) {
 			return;
 		}
 
