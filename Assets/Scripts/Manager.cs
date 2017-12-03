@@ -147,6 +147,9 @@ public class Manager : MonoBehaviour {
 
 			if (!roundEnded) {
 				UpdateTurnIndicators ();
+
+				AudioManager.Instance.Highpass (currentTurn == 1);
+
 			} else {
 				turnIndicators [0].Hide ();
 				turnIndicators [1].Hide ();

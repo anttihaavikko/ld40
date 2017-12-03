@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour {
 	private float fadeOutPos = 0f, fadeInPos = 0f;
 	private float fadeOutDuration = 1f, fadeInDuration = 3f;
 
+	private bool doingLowpass, doingHighpass;
+
 	/******/
 
 	private static AudioManager instance = null;
@@ -39,8 +41,6 @@ public class AudioManager : MonoBehaviour {
 			instance = this;
 		}
 
-		UpdateAudioFilters ();
-
 		reverb = GetComponent<AudioReverbFilter> ();
 
 		fromReverb = AudioReverbPreset.Hallway;
@@ -49,16 +49,20 @@ public class AudioManager : MonoBehaviour {
 		DontDestroyOnLoad(instance.gameObject);
 	}
 
-	public void UpdateAudioFilters() {
-		anim = Camera.main.GetComponent<Animator> ();
-		lowpass = Camera.main.GetComponent<AudioLowPassFilter> ();
-		highpass = Camera.main.GetComponent<AudioHighPassFilter> ();
-	}
-
 	public void BackToDefaultMusic() {
 		if (curMusic != musics [0]) {
 			ChangeMusic (0, 0.5f, 2f, 1f);
 		}
+	}
+
+	public void Lowpass(bool state = true) {
+		doingLowpass = state;
+		doingHighpass = false;
+	}
+
+	public void Highpass(bool state = true) {
+		doingHighpass = state;
+		doingLowpass = false;
 	}
 
 	public void ChangeMusic(int next, float fadeOutDur, float fadeInDur, float startDelay) {
@@ -84,16 +88,14 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	void Start() {
-		volume = ConfigManager.Instance.soundVolume;
-		musVolume = ConfigManager.Instance.musicVolume * 1.5f;
 	}
 
 	void Update() {
 
 		float targetPitch = 1f;
-		float targetLowpass = (false) ? 5000f : 22000;
-		float targetHighpass = (false) ? 350f : 10f;
-		float changeSpeed = 1f;
+		float targetLowpass = (doingLowpass) ? 5000f : 22000;
+		float targetHighpass = (doingHighpass) ? 400f : 10f;
+		float changeSpeed = 0.075f;
 
 		curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, targetPitch, 0.005f * changeSpeed);
 		lowpass.cutoffFrequency = Mathf.MoveTowards (lowpass.cutoffFrequency, targetLowpass, 750f * changeSpeed);

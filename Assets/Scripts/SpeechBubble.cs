@@ -107,6 +107,8 @@ public class SpeechBubble : MonoBehaviour {
 
 //		AudioManager.Instance.PlayEffectAt (8, transform.position, 0.4f);
 
+		AudioManager.Instance.Lowpass ();
+
 		if (closeClip) {
 			audioSource.PlayOneShot (closeClip, 1f);
 		}
@@ -184,6 +186,8 @@ public class SpeechBubble : MonoBehaviour {
 	}
 
 	public void Hide() {
+
+		AudioManager.Instance.Lowpass (false);
 
 //		AudioManager.Instance.PlayEffectAt (8, transform.position, 0.4f);
 
