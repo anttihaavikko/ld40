@@ -41,7 +41,11 @@ public class CustomButton : MonoBehaviour {
 //		Manager.Instance.Calculate ();
 		clicked = true;
 		clickEvent.Invoke ();
+
+		ChangeVisibility (false);
+
 		AudioManager.Instance.PlayEffectAt (1, transform.position, 0.5f);
+		EffectManager.Instance.AddEffect (1, transform.position + Vector3.up * transform.lossyScale.y * 0.75f);
 
 		cam.BaseEffect ();
 	}

@@ -115,6 +115,9 @@ public class Manager : MonoBehaviour {
 				resultMatrix.Multiply (c.GetMatrix ());
 			}
 
+			EffectManager.Instance.AddEffect (0, c.transform.position);
+			EffectManager.Instance.AddEffect (0, oc.transform.position);
+
 			Destroy (c.gameObject);
 			Destroy (oc.gameObject);
 
