@@ -24,7 +24,7 @@ public class Card : MonoBehaviour {
 
 	private Vector3 fromPosition, toPosition;
 	private float moveDuration = -1f;
-	private float moveSpeed = 5f;
+	private float moveSpeed = 3.5f;
 
 	public Transform shadow;
 
