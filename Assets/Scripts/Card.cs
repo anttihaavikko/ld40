@@ -134,13 +134,13 @@ public class Card : MonoBehaviour {
 
 	public void OnMouseDown() {
 
-		AudioManager.Instance.PlayEffectAt (3, transform.position, 0.5f);
-
 		moveSpeed = normalMoveSpeed + Random.Range(-0.5f, 0.5f);
 
 		if (!Manager.Instance.CanInteract ()) {
 			return;
 		}
+
+		AudioManager.Instance.PlayEffectAt (3, transform.position, 0.5f);
 
 		dragging = true;
 		dragTime = 0f;

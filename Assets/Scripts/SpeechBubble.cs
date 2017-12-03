@@ -64,7 +64,7 @@ public class SpeechBubble : MonoBehaviour {
 			transform.localScale = Vector3.MoveTowards (transform.localScale, hiddenSize, Time.deltaTime * 2f);
 		}
 
-		if (Random.value < 0.1f) {
+		if (Random.value < 0.2f) {
 			return;
 		}
 

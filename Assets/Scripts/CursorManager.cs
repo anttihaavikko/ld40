@@ -36,7 +36,7 @@ public class CursorManager : MonoBehaviour {
 
 		cursor = pointing ? 3 : 0;
 
-		if (hovering && Manager.Instance.CanInteract()) {
+		if (hovering && (!Manager.Instance || Manager.Instance.CanInteract())) {
 			cursor = Input.GetMouseButton (0) ? 2 : 1;
 		}
 	}

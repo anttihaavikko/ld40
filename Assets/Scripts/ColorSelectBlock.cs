@@ -34,6 +34,7 @@ public class ColorSelectBlock : MonoBehaviour {
 
 	public void OnMouseUp() {
 		if (!picker.locked) {
+			AudioManager.Instance.PlayEffectAt (1, transform.position, 0.5f);
 			block.PulseOnce ();
 			picker.Choose (number);
 		}

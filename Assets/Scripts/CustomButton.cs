@@ -13,10 +13,13 @@ public class CustomButton : MonoBehaviour {
 
 	public UnityEvent clickEvent;
 
+	private EffectCamera cam;
+
 	void Awake() {
 		originalScale = transform.localScale;
 		targetScale = hiddenScale;
 		transform.localScale = targetScale;
+		cam = Camera.main.GetComponent<EffectCamera> ();
 	}
 
 	public void OnMouseEnter() {
@@ -38,7 +41,9 @@ public class CustomButton : MonoBehaviour {
 //		Manager.Instance.Calculate ();
 		clicked = true;
 		clickEvent.Invoke ();
-		AudioManager.Instance.PlayEffectAt (1, Vector3.zero, 0.5f);
+		AudioManager.Instance.PlayEffectAt (1, transform.position, 0.5f);
+
+		cam.BaseEffect ();
 	}
 
 	void Update() {

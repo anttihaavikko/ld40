@@ -7,12 +7,15 @@ public class BlockCharacter : MonoBehaviour {
 	private Animator anim;
 	public GameObject[] accessories;
 
+	private EffectCamera cam;
+
 	public bool isPlayer = false;
 	public bool endAnim = false;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
+		cam = Camera.main.GetComponent<EffectCamera> ();
 
 		if (!endAnim) {
 			RandomizeSpeed ();
@@ -56,5 +59,6 @@ public class BlockCharacter : MonoBehaviour {
 
 	public void CollapseSound() {
 		AudioManager.Instance.PlayEffectAt (8, transform.position, 0.5f);
+		cam.BaseEffect (1.5f);
 	}
 }

@@ -91,6 +91,8 @@ public class Manager : MonoBehaviour {
 	public void Calculate() {
 		if (matrixArea.CardCount() > 0 && operatorArea.CardCount() > 0) {
 
+			cam.BaseEffect ();
+
 			CancelInvoke ("HintOrTaunt");
 
 			locked = true;
@@ -292,6 +294,9 @@ public class Manager : MonoBehaviour {
 		buttonToShow.ChangeVisibility (true);
 		infoDimmerAnim.Show ();
 		infoTextAnim.Show ();
+
+		cam.Shake (0.15f, 0.15f);
+		cam.Chromate (0.75f, 0.1f);
 
 		if (currentTurn == 1) {
 			AudioManager.Instance.PlayEffectAt (15, Vector3.zero, 0.5f);

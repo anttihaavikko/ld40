@@ -27,6 +27,7 @@ public class ColorPicker : MonoBehaviour {
 
 	public void Choose(int num) {
 		locked = true;
+		cam.BaseEffect ();
 		ProgressManager.Instance.selectedPlayerColor = num;
 		ProgressManager.Instance.GenerateOpponentColor ();
 		Invoke ("StartFade", 0.25f);
