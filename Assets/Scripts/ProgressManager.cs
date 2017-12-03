@@ -57,7 +57,6 @@ public class ProgressManager : MonoBehaviour {
 			Manager.Instance.bubble.QueMessage ("IMAGE2");
 			Manager.Instance.bubble.QueMessage ("IMAGE3");
 			Manager.Instance.bubble.QueMessage ("And (so on). You get the drift. Lets get (crackin')!");
-			multiTold = true;
 		}
 	}
 

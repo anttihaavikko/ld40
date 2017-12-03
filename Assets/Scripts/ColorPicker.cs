@@ -12,13 +12,6 @@ public class ColorPicker : MonoBehaviour {
 
 	public EffectCamera cam;
 
-	// Use this for initialization
-	void Start () {
-		for (int i = 0; i < blocks.Length; i++) {
-			blocks [i].SetNumber (i);
-		}
-	}
-
 	public void SetColor(int colorIndex) {
 		Color c = Block.BlockColor (colorIndex);
 		string hiliteColor = "#" + ColorUtility.ToHtmlStringRGB (c);

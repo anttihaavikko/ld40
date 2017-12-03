@@ -11,17 +11,18 @@ public class ColorSelectBlock : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		block = GetComponent<Block> ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+		block.SetNumber (number);
 	}
 
 	public void OnMouseEnter() {
 		CursorManager.Instance.pointing = true;
 		block.face.Emote (Face.Emotion.Brag);
-		picker.SetColor (number);
+
+		if (picker) {
+			picker.SetColor (number);
+		}
+
 		block.NumberPulse (0f, number);
 	}
 
@@ -33,7 +34,7 @@ public class ColorSelectBlock : MonoBehaviour {
 	}
 
 	public void OnMouseUp() {
-		if (!picker.locked) {
+		if (picker && !picker.locked) {
 			AudioManager.Instance.PlayEffectAt (1, transform.position, 0.5f);
 			block.PulseOnce ();
 			picker.Choose (number);

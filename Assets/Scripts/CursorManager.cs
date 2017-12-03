@@ -33,6 +33,7 @@ public class CursorManager : MonoBehaviour {
 	}
 
 	void Update() {
+		Cursor.visible = false;
 
 		cursor = pointing ? 3 : 0;
 

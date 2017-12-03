@@ -134,6 +134,7 @@ public class SpeechBubble : MonoBehaviour {
 
 		if (str == "IMAGE3") {
 			ShowImage (2);
+			ProgressManager.Instance.multiTold = true;
 			return;
 		}
 

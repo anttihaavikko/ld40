@@ -308,6 +308,8 @@ public class Manager : MonoBehaviour {
 		} else {
 			AudioManager.Instance.PlayEffectAt (8, Vector3.zero, 0.5f);
 		}
+
+		quitButton.ChangeVisibility (true);
 	}
 
 	public void ResumeGame() {
@@ -334,7 +336,6 @@ public class Manager : MonoBehaviour {
 
 			if (escMenu) {
 				DisplayText ("Really? <color=" + Block.HexColor (ProgressManager.Instance.selectedPlayerColor) + ">:(</color>", resumeButton, 0f);
-				quitButton.ChangeVisibility (true);
 			} else {
 				ResumeGame ();
 			}
