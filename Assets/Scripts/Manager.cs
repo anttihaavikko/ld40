@@ -190,9 +190,8 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void CheckCalcButtonVisibility() {
-		if (matrixArea.CardCount() > 0 && operatorArea.CardCount() > 0 && currentTurn == 0) {
-			calcButton.ChangeVisibility (true);
-		}
+		bool state = (matrixArea.CardCount () > 0 && operatorArea.CardCount () > 0 && currentTurn == 0);
+		calcButton.ChangeVisibility (state);
 	}
 
 	public bool CanInteract() {

@@ -16,13 +16,38 @@ public class CardHolder : MonoBehaviour {
 
 	public int cardType = -1;
 
+	private bool pulsating = false;
+	private float pulsePhase = 0f;
+	private float pulsePos = 0f;
+
+	private Vector3 originalScale;
+
 	// Use this for initialization
 	void Start () {
 		cards = new List<Card> ();
+		originalScale = transform.localScale;
 	}
 
 	public bool Allows(int type) {
 		return (cardType == -1 || type == cardType);
+	}
+
+	public void Pulse(bool state) {
+		pulsating = state;
+		pulsePhase = 0f;
+	}
+
+	void Update() {
+
+		if (pulsating && cards.Count == 0 && Manager.Instance.CanInteract()) {
+			pulsePhase += Time.deltaTime;
+			pulsePos = Mathf.Abs(Mathf.Sin (pulsePhase * 5f));
+		} else {
+			pulsePos = Mathf.MoveTowards (pulsePos, 0f, Time.deltaTime * 2.5f);
+			pulsating = false;
+		}
+
+		transform.localScale = Vector3.Lerp (1f * originalScale, 1.05f * originalScale, pulsePos);
 	}
 
 	public void PickRandomMatrix() {

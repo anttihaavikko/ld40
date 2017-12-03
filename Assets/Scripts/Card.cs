@@ -111,15 +111,22 @@ public class Card : MonoBehaviour {
 
 	public void OnMouseEnter() {
 		CursorManager.Instance.hovering = true;
+		PulseTarget (true);
 	}
 
 	public void OnMouseExit() {
 		CursorManager.Instance.hovering = false;
+		PulseTarget (false);
+	}
+
+	private void PulseTarget(bool state) {
+
+		if (currentHolder.cardType == -1) {
+			currentHolder.targetHolders [isMatrix ? 0 : 1].Pulse (state);
+		}
 	}
 
 	public void OnMouseDown() {
-
-//		CardManager.Instance.cursor = 1;
 
 		if (!Manager.Instance.CanInteract ()) {
 			return;
@@ -143,8 +150,6 @@ public class Card : MonoBehaviour {
 		if (!Manager.Instance.CanInteract ()) {
 			return;
 		}
-
-//		CardManager.Instance.cursor = 0;
 
 		dragging = false;
 
