@@ -34,6 +34,7 @@ public class CustomButton : MonoBehaviour {
 //		Manager.Instance.Calculate ();
 		clicked = true;
 		clickEvent.Invoke ();
+		AudioManager.Instance.PlayEffectAt (1, Vector3.zero, 0.5f);
 	}
 
 	void Update() {

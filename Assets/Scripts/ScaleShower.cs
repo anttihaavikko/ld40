@@ -23,9 +23,11 @@ public class ScaleShower : MonoBehaviour {
 
 	public void Hide() {
 		targetScale = hiddenScale;
+		AudioManager.Instance.PlayEffectAt (11, transform.position, 0.5f);
 	}
 
 	public void Show() {
 		targetScale = originalScale;
+		AudioManager.Instance.PlayEffectAt (11, transform.position, 0.5f);
 	}
 }

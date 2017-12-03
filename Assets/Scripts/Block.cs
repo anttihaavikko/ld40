@@ -78,7 +78,12 @@ public class Block : MonoBehaviour {
 	}
 
 	void DoNumberPulse() {
+		AudioManager.Instance.PlayEffectAt (14, transform.position, 0.25f);
 		anim.SetTrigger ("numberpulse");
 		SetNumber (number);
+	}
+
+	public void PulseSound() {
+		AudioManager.Instance.PlayEffectAt (9, Vector3.zero, 0.15f);
 	}
 }

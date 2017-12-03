@@ -141,15 +141,23 @@ MonoBehaviour:
     type: 2}
   effects:
   - {fileID: 8300000, guid: a069afe5d23c74a3b8049d6d845e5e06, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 005b0d1249f714ebc81ff375f95c7c6c, type: 3}
+  - {fileID: 8300000, guid: 5bd35f80f868a41cdbc35984318d96d6, type: 3}
+  - {fileID: 8300000, guid: c2bc523932d0f407e838a946ebfe04f9, type: 3}
+  - {fileID: 8300000, guid: c20136c43e86b48bdad81ec8b5b014f7, type: 3}
+  - {fileID: 8300000, guid: 7a9134b1c9c754d328a53e6d78ccaa8b, type: 3}
+  - {fileID: 8300000, guid: 8f2bc999ea0d24a87bd9b5d94f2c9a02, type: 3}
+  - {fileID: 8300000, guid: b7375c309dc8a4f968a714a892ee72b8, type: 3}
+  - {fileID: 8300000, guid: 4161c32c7f88b419a88430b442b4fba4, type: 3}
+  - {fileID: 8300000, guid: ed46d9a3d0725478c8224d313043b657, type: 3}
+  - {fileID: 8300000, guid: 3a26fcb0a5af746aebdbee4a910b0983, type: 3}
+  - {fileID: 8300000, guid: 5213a038d9a794679934ef9a39c9de06, type: 3}
+  - {fileID: 8300000, guid: 463925b747b6f4073b5e32f7dcce3dfb, type: 3}
+  - {fileID: 8300000, guid: a0c4504ead668478293fd1698a3b9323, type: 3}
+  - {fileID: 8300000, guid: e1262fd2020294e71967f2f75aca1181, type: 3}
+  - {fileID: 8300000, guid: d69f2674b20e04cd4a0592fbd07f9fac, type: 3}
+  - {fileID: 8300000, guid: 080fc9c399984413195b6342566e31af, type: 3}
+  - {fileID: 8300000, guid: a65e8c7eecbc34e0d85c1c86bfb6099a, type: 3}
   lowpass: {fileID: 169988565832387740}
   highpass: {fileID: 165329797835353674}
 --- !u!165 &165329797835353674

@@ -64,7 +64,7 @@ public class SpeechBubble : MonoBehaviour {
 			transform.localScale = Vector3.MoveTowards (transform.localScale, hiddenSize, Time.deltaTime * 2f);
 		}
 
-		if (Random.value < 0.25f) {
+		if (Random.value < 0.1f) {
 			return;
 		}
 
@@ -107,8 +107,7 @@ public class SpeechBubble : MonoBehaviour {
 	}
 
 	private void ShowMessage(string str) {
-
-//		AudioManager.Instance.PlayEffectAt (8, transform.position, 0.4f);
+		AudioManager.Instance.PlayEffectAt (11, Vector3.zero, 0.5f);
 
 		AudioManager.Instance.Lowpass ();
 
@@ -191,6 +190,7 @@ public class SpeechBubble : MonoBehaviour {
 
 	public void Hide() {
 
+		AudioManager.Instance.PlayEffectAt (11, Vector3.zero, 0.5f);
 		AudioManager.Instance.Lowpass (false);
 
 //		AudioManager.Instance.PlayEffectAt (8, transform.position, 0.4f);

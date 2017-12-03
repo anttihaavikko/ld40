@@ -92,12 +92,16 @@ public class CardHolder : MonoBehaviour {
 				Card oc = Instantiate (operationCardPrefab, transform.position + (cards.Count + 1) * 0.5f * 5.1f * Vector3.right, Quaternion.identity);
 				AddCard (oc, true);
 				oc.SetSpeed (3.5f + i * 0.5f);
+
+				AudioManager.Instance.PlayEffectAt (6, oc.transform.position, 0.15f);
 			}
 
 			for (int i = 0; i < mats; i++) {
 				Card c = Instantiate (cardPrefab, transform.position + (cards.Count + 1) * 0.5f * 5.1f * Vector3.right, Quaternion.identity);
 				AddCard (c, true);
 				c.SetSpeed (3.5f + i * 0.5f);
+
+				AudioManager.Instance.PlayEffectAt (6, c.transform.position, 0.15f);
 			}
 
 			PositionCards ();
@@ -113,9 +117,15 @@ public class CardHolder : MonoBehaviour {
 		PositionCards ();
 	}
 
+	public void AddSound() {
+		AudioManager.Instance.PlayEffectAt (7, transform.position, 0.5f);
+	}
+
 	public void AddCard(Card c, bool toEnd) {
 
 		if(!cards.Contains(c)) {
+
+			Invoke ("AddSound", 0.25f);
 
 			if (cards.Count >= cardMax) {
 				Card swap = cards [0];

@@ -134,6 +134,8 @@ public class Card : MonoBehaviour {
 
 	public void OnMouseDown() {
 
+		AudioManager.Instance.PlayEffectAt (3, transform.position, 0.5f);
+
 		moveSpeed = normalMoveSpeed + Random.Range(-0.5f, 0.5f);
 
 		if (!Manager.Instance.CanInteract ()) {
@@ -179,6 +181,8 @@ public class Card : MonoBehaviour {
 					return;
 				}
 			}
+
+			AudioManager.Instance.PlayEffectAt (6, transform.position, 0.5f);
 		}
 			
 		currentHolder.AddCard (this, true);
@@ -186,12 +190,19 @@ public class Card : MonoBehaviour {
 
 	public void UseCard(float delay = 0f) {
 		Invoke ("UseCard", delay);
+		Invoke ("UseSound", delay);
+	}
+
+	public void UseSound() {
+		AudioManager.Instance.PlayEffectAt (3, transform.position, 0.5f);
 	}
 
 	public void UseCard() {
 		int type = isMatrix ? 0 : 1;
 		currentHolder.RemoveCard (this);
 		currentHolder.targetHolders[type].AddCard (this, false);
+
+		AudioManager.Instance.PlayEffectAt (6, transform.position, 0.5f);
 	}
 
 	private bool LeftArea(float distance) {

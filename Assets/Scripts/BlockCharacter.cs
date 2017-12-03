@@ -49,4 +49,12 @@ public class BlockCharacter : MonoBehaviour {
 			}
 		}
 	}
+
+	public void SwaySound() {
+		AudioManager.Instance.PlayEffectAt (16, transform.position, 0.05f);
+	}
+
+	public void CollapseSound() {
+		AudioManager.Instance.PlayEffectAt (8, transform.position, 0.5f);
+	}
 }

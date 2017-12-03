@@ -59,15 +59,13 @@ public class Manager : MonoBehaviour {
 
 		resultMatrix.FillNormal ();
 
-		int num = StartCards ();
-
 		bubble.SetColor (Block.TextColor (opponentNum));
 
 		if (ProgressManager.Instance.level == 0) {
 			Invoke ("Intro", 1.2f);
 		} else {
 			locked = false;
-			handArea.SpawnCards (3, num);
+			Invoke ("GiveCards", 1f);
 		}
 
 		AudioManager.Instance.Highpass (false);
@@ -88,6 +86,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void GiveCards() {
+		int num = StartCards ();
 		handArea.SpawnCards (3, 2);
 	}
 
@@ -174,6 +173,8 @@ public class Manager : MonoBehaviour {
 
 			if (!roundEnded) {
 				locked = false;
+			} else {
+				AudioManager.Instance.Highpass (true);
 			}
 		}
 	}
@@ -289,10 +290,17 @@ public class Manager : MonoBehaviour {
 		buttonToShow.ChangeVisibility (true);
 		infoDimmerAnim.Show ();
 		infoTextAnim.Show ();
+
+		if (currentTurn == 1) {
+			AudioManager.Instance.PlayEffectAt (15, Vector3.zero, 0.5f);
+		} else {
+			AudioManager.Instance.PlayEffectAt (8, Vector3.zero, 0.5f);
+		}
 	}
 
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.Space)) {
+			AudioManager.Instance.PlayEffectAt (1, Vector3.zero, 0.5f);
 			Calculate ();
 		}
 
@@ -330,6 +338,12 @@ public class Manager : MonoBehaviour {
 		Invoke ("PickOperation", opponentSpeed + wait);
 		Invoke ("PickMatrix", opponentSpeed * 3 + wait);
 		Invoke ("Calculate", opponentSpeed * 6 + wait);
+
+		Invoke ("CalcSound", opponentSpeed * 6 + wait);
+	}
+
+	private void CalcSound() {
+		AudioManager.Instance.PlayEffectAt (1, Vector3.zero, 0.5f);
 	}
 
 	private void DoAnalyze() {
@@ -392,7 +406,9 @@ public class Manager : MonoBehaviour {
 	}
 
 	public void UpdateTurnIndicators() {
-		turnIndicators [currentTurn].Show ();;
+		turnIndicators [currentTurn].Show ();
 		turnIndicators [(currentTurn + 1) % 2].Hide ();
+
+		AudioManager.Instance.PlayEffectAt (17, turnIndicators [currentTurn].transform.position, 0.15f);
 	}
 }
