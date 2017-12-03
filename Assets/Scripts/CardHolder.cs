@@ -89,13 +89,15 @@ public class CardHolder : MonoBehaviour {
 		if (cards.Count < cardMax) {
 
 			for (int i = 0; i < ops; i++) {
-				Card oc = Instantiate (operationCardPrefab, transform.position + (cards.Count + 1) * 0.5f * 1.1f * Vector3.right, Quaternion.identity);
+				Card oc = Instantiate (operationCardPrefab, transform.position + (cards.Count + 1) * 0.5f * 5.1f * Vector3.right, Quaternion.identity);
 				AddCard (oc, true);
+				oc.SetSpeed (3.5f + i * 0.5f);
 			}
 
 			for (int i = 0; i < mats; i++) {
-				Card c = Instantiate (cardPrefab, transform.position + (cards.Count + 1) * 0.5f * 1.1f * Vector3.right, Quaternion.identity);
+				Card c = Instantiate (cardPrefab, transform.position + (cards.Count + 1) * 0.5f * 5.1f * Vector3.right, Quaternion.identity);
 				AddCard (c, true);
+				c.SetSpeed (3.5f + i * 0.5f);
 			}
 
 			PositionCards ();

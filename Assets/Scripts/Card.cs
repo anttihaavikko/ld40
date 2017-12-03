@@ -24,7 +24,9 @@ public class Card : MonoBehaviour {
 
 	private Vector3 fromPosition, toPosition;
 	private float moveDuration = -1f;
+
 	private float moveSpeed = 3.5f;
+	private float normalMoveSpeed = 3.5f;
 
 	public Transform shadow;
 
@@ -61,6 +63,10 @@ public class Card : MonoBehaviour {
 		shadowScale = shadow.localScale;
 
 //		sprite.color = new Color (Random.Range (0.5f, 1f), Random.Range (0.5f, 1f), Random.Range (0.5f, 1f));
+	}
+
+	public void SetSpeed(float s) {
+		moveSpeed = s;
 	}
 	
 	// Update is called once per frame
@@ -127,6 +133,8 @@ public class Card : MonoBehaviour {
 	}
 
 	public void OnMouseDown() {
+
+		moveSpeed = normalMoveSpeed + Random.Range(-0.5f, 0.5f);
 
 		if (!Manager.Instance.CanInteract ()) {
 			return;
