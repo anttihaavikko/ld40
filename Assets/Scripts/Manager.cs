@@ -69,6 +69,8 @@ public class Manager : MonoBehaviour {
 			locked = false;
 			handArea.SpawnCards (3, num);
 		}
+
+		AudioManager.Instance.Highpass (false);
 	}
 
 	void Intro() {

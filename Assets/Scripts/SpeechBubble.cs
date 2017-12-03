@@ -64,6 +64,10 @@ public class SpeechBubble : MonoBehaviour {
 			transform.localScale = Vector3.MoveTowards (transform.localScale, hiddenSize, Time.deltaTime * 2f);
 		}
 
+		if (Random.value < 0.25f) {
+			return;
+		}
+
 		if (messagePos >= 0 && !done) {
 			messagePos++;
 
@@ -80,9 +84,8 @@ public class SpeechBubble : MonoBehaviour {
 
 			string letter = message.Substring (messagePos - 1, 1);
 
-			if (audioSource && letter != " " && letter != "." && letter != "!"  && letter != "?") {
-				audioSource.pitch = Random.Range (0.8f, 1.2f);
-				audioSource.PlayOneShot (audioSource.clip, 0.15f);
+			if (messagePos == 1 || letter == " ") {
+				AudioManager.Instance.PlayEffectAt (0, Vector3.zero, 0.5f);
 			}
 
 			if (messagePos >= message.Length) {
@@ -155,6 +158,7 @@ public class SpeechBubble : MonoBehaviour {
 		image.sprite = sprites [idx];
 		image.enabled = true;
 		done = true;
+		AudioManager.Instance.PlayEffectAt (0, Vector3.zero, 0.5f);
 	}
 
 	public void QueMessage(string str) {

@@ -139,7 +139,17 @@ MonoBehaviour:
   volume: 0.5
   effectPrefab: {fileID: 114852473009967456, guid: 3d15b96e9a8fd4b68902e126f7cce22b,
     type: 2}
-  effects: []
+  effects:
+  - {fileID: 8300000, guid: a069afe5d23c74a3b8049d6d845e5e06, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   lowpass: {fileID: 169988565832387740}
   highpass: {fileID: 165329797835353674}
 --- !u!165 &165329797835353674
