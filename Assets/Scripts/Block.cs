@@ -21,7 +21,7 @@ public class Block : MonoBehaviour {
 		float baseVal = 0.9f;
 
 		Color[] blockColors = {
-			new Color(0.7f, 0.7f, 0.7f),
+			new Color(0.6f, 0.6f, 0.6f),
 			Color.HSVToRGB(0f, baseSat, baseVal),
 			Color.HSVToRGB(0.1f, baseSat, baseVal),
 			Color.HSVToRGB(0.2f, baseSat, baseVal),
