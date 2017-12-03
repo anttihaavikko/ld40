@@ -92,6 +92,10 @@ public class Manager : MonoBehaviour {
 	public void Calculate() {
 		if (matrixArea.CardCount() > 0 && operatorArea.CardCount() > 0) {
 
+			CancelInvoke ("HintOrTaunt");
+
+			locked = true;
+
 			Card c = matrixArea.PopCard ();
 			Card oc = operatorArea.PopCard ();
 			int op = oc.GetOperation ();
@@ -139,6 +143,8 @@ public class Manager : MonoBehaviour {
 			turnNumber++;
 			currentTurn = (currentTurn + 1) % 2;
 
+//			currentTurn = 0; // always player turn
+
 			if (!roundEnded) {
 				UpdateTurnIndicators ();
 			} else {
@@ -159,6 +165,10 @@ public class Manager : MonoBehaviour {
 
 			if (currentTurn == 1 && !roundEnded) {
 				OpponentTurn ();
+			}
+
+			if (!roundEnded) {
+				locked = false;
 			}
 		}
 	}

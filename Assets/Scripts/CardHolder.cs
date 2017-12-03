@@ -201,7 +201,7 @@ public class CardHolder : MonoBehaviour {
 				}
 
 				if (oc.GetOperation () == 2) {
-					tempMatrix = mat * c.GetMatrix ();
+					tempMatrix = c.GetMatrix () * mat;
 				}
 
 				int winner = -1;
@@ -245,6 +245,8 @@ public class CardHolder : MonoBehaviour {
 				}
 			}
 		}
+
+		Debug.Log ("Analyze ended, no winning moves..." + Time.time);
 
 		return false;
 	}

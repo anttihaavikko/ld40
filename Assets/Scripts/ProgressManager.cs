@@ -8,6 +8,7 @@ public class ProgressManager : MonoBehaviour {
 
 	public bool spaceTold = false;
 	public bool multiTold = false;
+	public bool loopTold = false;
 
 	/******/
 
@@ -25,6 +26,13 @@ public class ProgressManager : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad(instance.gameObject);
+	}
+
+	public void LoopTutorial() {
+		if (!loopTold) {
+			Manager.Instance.bubble.QueMessage ("You see, there are (limits). The values must be between (0 and 9) or it (loops) around...");
+			loopTold = true;
+		}
 	}
 
 	public void SpaceTutorial() {

@@ -42,13 +42,18 @@ public class BlockMatrix : MonoBehaviour {
 	}
 
 	public void Multiply(Matrix other) {
-		matrix = matrix * other;
+		matrix = other * matrix;
 		UpdateNumbers (true);
 	}
 
 	private void Validate() {
 		for (int i = 0; i < blocks.Length; i++) {
 			double num = matrix.mat [i % 3, i / 3];
+
+			if (num < 0 || num > 9) {
+				ProgressManager.Instance.LoopTutorial ();
+			}
+
 			num = num % 10;
 			num = (num < 0) ? num + 10 : num;
 			matrix.mat [i % 3, i / 3] = num;
