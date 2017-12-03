@@ -10,7 +10,7 @@ public class Manager : MonoBehaviour {
 	public CardHolder matrixArea, operatorArea, handArea;
 	public BlockMatrix resultMatrix;
 
-	public CustomButton calcButton, nextButton, retryButton;
+	public CustomButton calcButton, nextButton, retryButton, resumeButton, quitButton;
 
 	public Block playerBlock, opponentBlock;
 
@@ -33,6 +33,8 @@ public class Manager : MonoBehaviour {
 	public SpeechBubble bubble;
 
 	public ScaleShower[] turnIndicators;
+
+	private bool escMenu = false;
 
 	private static Manager instance = null;
 	public static Manager Instance {
@@ -305,7 +307,36 @@ public class Manager : MonoBehaviour {
 		}
 	}
 
+	public void ResumeGame() {
+		escMenu = false;
+		resumeButton.ChangeVisibility (false);
+		quitButton.ChangeVisibility (false);
+		infoDimmerAnim.Hide ();
+		infoTextAnim.Hide ();
+	}
+
+	public void BackToMenu() {
+		cam.Fade (true, 0.5f);
+		Invoke ("LoadMenu", 1f);
+	}
+
+	private void LoadMenu() {
+		SceneManager.LoadSceneAsync ("Start");
+	}
+
 	void Update() {
+
+		if (Input.GetKeyDown (KeyCode.Escape) && (CanInteract() || escMenu)) {
+			escMenu = !escMenu;
+
+			if (escMenu) {
+				DisplayText ("Really? <color=" + Block.HexColor (ProgressManager.Instance.selectedPlayerColor) + ">:(</color>", resumeButton, 0f);
+				quitButton.ChangeVisibility (true);
+			} else {
+				ResumeGame ();
+			}
+		}
+
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			AudioManager.Instance.PlayEffectAt (1, Vector3.zero, 0.5f);
 			Calculate ();
@@ -329,7 +360,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public bool CanInteract() {
-		return (currentTurn == 0 && !roundEnded && !bubble.IsShown() && !locked);
+		return (currentTurn == 0 && !roundEnded && !bubble.IsShown() && !locked && !escMenu);
 	}
 
 	private void OpponentTurn() {

@@ -56,6 +56,12 @@ public class Block : MonoBehaviour {
 		return blockColors [idx];
 	}
 
+	public static string HexColor(int idx) {
+		Color c = BlockColor (idx);
+		string hiliteColor = "#" + ColorUtility.ToHtmlStringRGB (c);
+		return hiliteColor;
+	}
+
 	public void Pulse() {
 		anim.speed = 0.5f;
 		anim.SetBool ("pulse", true);
