@@ -9,6 +9,8 @@ public class CustomButton : MonoBehaviour {
 	private bool hovering = false;
 	private Vector3 hiddenScale = new Vector3(1.1f, 0f, 1f);
 
+	private bool clicked = false;
+
 	public UnityEvent clickEvent;
 
 	void Start() {
@@ -18,11 +20,11 @@ public class CustomButton : MonoBehaviour {
 	}
 
 	public void OnMouseEnter() {
-		hovering = true;
+		CursorManager.Instance.pointing = true;
 	}
 
 	public void OnMouseExit() {
-		hovering = false;
+		CursorManager.Instance.pointing = false;
 	}
 
 	public void OnMouseDown() {
@@ -30,6 +32,7 @@ public class CustomButton : MonoBehaviour {
 
 	public void OnMouseUp() {
 //		Manager.Instance.Calculate ();
+		clicked = true;
 		clickEvent.Invoke ();
 	}
 

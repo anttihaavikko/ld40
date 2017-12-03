@@ -109,13 +109,13 @@ public class Card : MonoBehaviour {
 		transform.rotation = Quaternion.RotateTowards (transform.rotation, Quaternion.Euler (new Vector3 (-ydiff, xdiff, 0)), 0.5f);
 	}
 
-//	public void OnMouseEnter() {
-//		CardManager.Instance.cursor = 1;
-//	}
-//
-//	public void OnMouseExit() {
-//		CardManager.Instance.cursor = 0;
-//	}
+	public void OnMouseEnter() {
+		CursorManager.Instance.hovering = true;
+	}
+
+	public void OnMouseExit() {
+		CursorManager.Instance.hovering = false;
+	}
 
 	public void OnMouseDown() {
 

@@ -131,6 +131,7 @@
      <Compile Include="Assets\Scripts\Card.cs" />
      <Compile Include="Assets\Scripts\CardHolder.cs" />
      <Compile Include="Assets\Scripts\ConfigManager.cs" />
+     <Compile Include="Assets\Scripts\CursorManager.cs" />
      <Compile Include="Assets\Scripts\CustomButton.cs" />
      <Compile Include="Assets\Scripts\EffectCamera.cs" />
      <Compile Include="Assets\Scripts\EffectManager.cs" />
